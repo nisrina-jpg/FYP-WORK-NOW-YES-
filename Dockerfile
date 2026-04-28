@@ -33,7 +33,9 @@ RUN playwright install chromium
 
 # ── Copy source ───────────────────────────────────────────────────────────────
 COPY main.py .
+COPY entrypoint.sh .
+RUN chmod +x entrypoint.sh
 
 # ── Expose port & start ───────────────────────────────────────────────────────
 EXPOSE 8000
-CMD uvicorn main:app --host 0.0.0.0 --port ${PORT:-8000}
+ENTRYPOINT ["./entrypoint.sh"]
